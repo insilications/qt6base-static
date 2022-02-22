@@ -1,6 +1,12 @@
+# bans
 beignet-dev
+brotli
+brotli-bin
+brotli-lib
 cups
 cups-dev
+dav1d
+dav1d-dev
 jasper-dev
 pypi(aioquic)
 pypi(argh)

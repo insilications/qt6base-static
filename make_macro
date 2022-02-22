@@ -1,2 +1,2 @@
-#! cmake --build .
-ninja
+exit 1
+cmake --build .
