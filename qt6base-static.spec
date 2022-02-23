@@ -451,8 +451,7 @@ BuildRequires : zstd-staticdev
 %define debug_package %{nil}
 
 %description
-qtokenautomaton is a token generator, that generates a simple, Unicode aware
-tokenizer for C++ that uses the Qt API.
+No detailed description available
 
 %prep
 %setup -q -n qt6base-6.3
@@ -464,7 +463,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645576999
+export SOURCE_DATE_EPOCH=1645577624
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -559,7 +558,8 @@ export LIBS="${LIBS_GENERATE}"
 -DCMAKE_INSTALL_LIBDIR=/usr/lib64 \
 -DCMAKE_PREFIX_PATH="/usr;/usr/lib64;/usr/lib;/usr/local/cuda/lib64;/usr/share" \
 -DQT_FORCE_FIND_TOOLS:BOOL=ON \
--DQT_HOST_PATH="/usr/lib64/cmake" \
+-DQT_HOST_PATH="/usr" \
+-DQt6HostInfo_DIR="/usr/lib64/cmake/Qt6HostInfo" \
 -DQT_BUILD_TOOLS_BY_DEFAULT:BOOL=OFF \
 -DINSTALL_ARCHDATADIR:STRING=/usr/lib64/qt6 \
 -DINSTALL_BINDIR:STRING=/usr/lib64/bin \
@@ -689,7 +689,7 @@ cmake --build .
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1645576999
+export SOURCE_DATE_EPOCH=1645577624
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
