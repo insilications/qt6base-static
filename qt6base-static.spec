@@ -463,7 +463,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645601790
+export SOURCE_DATE_EPOCH=1645602665
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -671,21 +671,23 @@ export LIBS="${LIBS_GENERATE}"
 sd "\-D\-DDBUS_STATIC_BUILD" -- "-DDBUS_STATIC_BUILD" $(fd -uu --glob *.ninja)
 sd "\-D\-DDBUS_STATIC_BUILD" -- "-DDBUS_STATIC_BUILD" $(fd -uu --glob *.ninja)
 sd "\-DDBUS_STATIC_BUILD" -- "DBUS_STATIC_BUILD" $(fd -uu --glob *.json)
-sd '(LINK_FLAGS.+)(\s\-flto\s)' -- '$1 -flto=auto ' $(fd -uu --glob *.ninja)
-sd '(FLAGS.+)(\s\-flto\s)' -- '$1 -flto=auto ' $(fd -uu --glob *.ninja)
-sd '(LINK_LIBRARIES.+)(\s\-flto\s)' -- '$1 -flto=auto ' $(fd -uu --glob *.ninja)
+sd '(LINK_FLAGS.+)(\s\-flto\s)' -- '$1 -flto=16 ' $(fd -uu --glob *.ninja)
+sd '(FLAGS.+)(\s\-flto\s)' -- '$1 -flto=16 ' $(fd -uu --glob *.ninja)
+sd '(LINK_LIBRARIES.+)(\s\-flto\s)' -- '$1 -flto=16 ' $(fd -uu --glob *.ninja)
 sd '(LINK_FLAGS.+)(\s\-fno\-fat\-lto\-objects)' -- '$1 -ffat-lto-objects' $(fd -uu --glob *.ninja)
 sd '(FLAGS.+)(\s\-fno\-fat\-lto\-objects)' -- '$1 -ffat-lto-objects' $(fd -uu --glob *.ninja)
 sd '(LINK_LIBRARIES.+)(\s\-fno\-fat\-lto\-objects)' -- '$1 -ffat-lto-objects' $(fd -uu --glob *.ninja)
+sd '(LINK_FLAGS.+)(\s\-ffunction\-sections\s\-fdata\-sections)' -- '$1' $(fd -uu --glob *.ninja)
+sd '(FLAGS.+)(\s\-ffunction\-sections\s\-fdata\-sections)' -- '$1' $(fd -uu --glob *.ninja)
+sd '(LINK_LIBRARIES.+)(\s\-ffunction\-sections\s\-fdata\-sections)' -- '$1' $(fd -uu --glob *.ninja)
 ## make_prepend64 end
 ## make_macro content
-exit 1
 cmake --build .
 ## make_macro end
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1645601790
+export SOURCE_DATE_EPOCH=1645602665
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
