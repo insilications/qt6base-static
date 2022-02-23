@@ -1,0 +1,26 @@
+From c4ea89fb380d637e4dc0e2b44203a91fc1e1855f Mon Sep 17 00:00:00 2001
+From: Francisco Boni Neto <boboniboni@gmail.com>
+Date: Wed, 23 Feb 2022 04:08:59 -0300
+Subject: [PATCH] Fix FindWrapLibClang.cmake run for Clang-based lupdate
+
+Change-Id: Ia3c42ed531eec0e49ddfdb47fcfea5badc16366a
+---
+ cmake/FindWrapLibClang.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/FindWrapLibClang.cmake b/cmake/FindWrapLibClang.cmake
+index 78a22cd0..3c02ac80 100644
+--- a/cmake/FindWrapLibClang.cmake
++++ b/cmake/FindWrapLibClang.cmake
+@@ -61,7 +61,7 @@ if(TARGET libclang AND ((TARGET clang-cpp AND TARGET LLVM) OR TARGET clangHandle
+         set(__qt_clang_genex "$<IF:${__qt_clang_genex_condition},clang-cpp;LLVM,clangHandleCXX>")
+         target_link_libraries(WrapLibClang::WrapLibClang
+             INTERFACE libclang
+-            ${__qt_clang_genex}
++            "${__qt_clang_genex}"
+             Threads::Threads
+             )
+ 
+-- 
+2.35.1
+

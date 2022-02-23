@@ -1,8 +1,5 @@
 -G Ninja
 -DCMAKE_BUILD_TYPE=None
--DQT_HOST_PATH="/usr"
--DQt6HostInfo_DIR="/usr/lib64/cmake/Qt6HostInfo"
--DQT_BUILD_TOOLS_BY_DEFAULT:BOOL=OFF
 -DCMAKE_PREFIX_PATH="/usr;/usr/lib64;/usr/lib;/usr/local/cuda/lib64;/usr/share"
 -DCMAKE_INSTALL_PREFIX=/usr/qt6-static
 -DINSTALL_SYSCONFDIR=/usr/qt6-static/share
@@ -23,7 +20,7 @@
 -DINSTALL_TRANSLATIONSDIR:STRING=/usr/qt6-static/share/translations
 -DCMAKE_JOB_POOLS:STRING="compile=16;link=1"
 -DCMAKE_JOB_POOL_COMPILE:STRING="compile"
--DCMAKE_JOB_POOL_LINK:STRING="compile"
+-DCMAKE_JOB_POOL_LINK:STRING="link"
 -DCMAKE_INTERPROCEDURAL_OPTIMIZATION:BOOL=ON
 -DCMAKE_NM=/usr/bin/gcc-nm
 -DCMAKE_RANLIB=/usr/bin/gcc-ranlib

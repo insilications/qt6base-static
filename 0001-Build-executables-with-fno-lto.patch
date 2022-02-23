@@ -1,0 +1,42 @@
+From 806d66f734de1cfac01604cbe262dc9599b97ee6 Mon Sep 17 00:00:00 2001
+From: Francisco Boni Neto <boboniboni@gmail.com>
+Date: Wed, 23 Feb 2022 04:30:01 -0300
+Subject: [PATCH] Build executables with -fno-lto
+
+Change-Id: I6112474889e5ebdc0cf6887ca0be696c896441d8
+---
+ cmake/QtAppHelpers.cmake  | 3 +++
+ cmake/QtToolHelpers.cmake | 3 +++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/cmake/QtAppHelpers.cmake b/cmake/QtAppHelpers.cmake
+index 4301b7e480..52ed40592d 100644
+--- a/cmake/QtAppHelpers.cmake
++++ b/cmake/QtAppHelpers.cmake
+@@ -42,6 +42,9 @@ function(qt_internal_add_app target)
+     _qt_internal_apply_strict_cpp("${target}")
+     qt_internal_adjust_main_config_runtime_output_dir("${target}" "${output_directory}")
+ 
++    set_property(TARGET "${target}" APPEND PROPERTY COMPILE_OPTIONS "-fno-lto")
++    set_property(TARGET "${target}" APPEND PROPERTY LINK_OPTIONS "-fno-lto")
++
+     # To mimic the default behaviors of qt_app.prf, we by default enable GUI Windows applications,
+     # but don't enable macOS bundles.
+     # Bundles are enabled in a separate set_target_properties call if an Info.plist file
+diff --git a/cmake/QtToolHelpers.cmake b/cmake/QtToolHelpers.cmake
+index d640f146ae..06483c4679 100644
+--- a/cmake/QtToolHelpers.cmake
++++ b/cmake/QtToolHelpers.cmake
+@@ -230,6 +230,9 @@ function(qt_internal_add_tool target_name)
+     _qt_internal_apply_strict_cpp("${target_name}")
+     qt_internal_adjust_main_config_runtime_output_dir("${target_name}" "${output_dir}")
+ 
++    set_property(TARGET "${target_name}" APPEND PROPERTY COMPILE_OPTIONS "-fno-lto")
++    set_property(TARGET "${target_name}" APPEND PROPERTY LINK_OPTIONS "-fno-lto")
++
+     if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.19.0" AND QT_FEATURE_debug_and_release)
+         set_property(TARGET "${target_name}"
+             PROPERTY EXCLUDE_FROM_ALL "$<NOT:$<CONFIG:${QT_MULTI_CONFIG_FIRST_CONFIG}>>")
+-- 
+2.35.1
+
