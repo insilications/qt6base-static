@@ -1,12 +1,12 @@
 install -dm 0755 %{buildroot}/usr/bin/
-pushd %{buildroot}/usr/lib64/bin
+pushd %{buildroot}/usr/qt6-static/bin
 for i in * ; do
-    ln -sf /usr/lib64/bin/$i %{buildroot}/usr/bin/${i}-qt6
+    ln -sf /usr/qt6-static/bin/$i %{buildroot}/usr/bin/${i}-qt6-static
 done
 popd
 install -dm 0755 %{buildroot}/usr/lib64/haswell/
 pushd %{buildroot}/usr/lib64/haswell/
-for lib in ../lib*.so*; do
+for lib in ../../qt6-static/lib64/lib*.so*; do
     ln -sf $lib %{buildroot}/usr/lib64/haswell/;
 done
 popd
