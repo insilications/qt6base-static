@@ -20,6 +20,7 @@ libicui18n.so.70
 libicuuc.so.70
 libjpeg.so.62
 libm.so.6
+libmvec.so.1
 libpcre2-16.so.0
 libpng16.so.16
 libpq.so.5
