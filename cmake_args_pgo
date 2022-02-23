@@ -7,7 +7,8 @@
 -DCMAKE_INSTALL_LIBDIR=/usr/lib64
 -DCMAKE_PREFIX_PATH="/usr;/usr/lib64;/usr/lib;/usr/local/cuda/lib64;/usr/share"
 -DQT_FORCE_FIND_TOOLS:BOOL=ON
--DQT_HOST_PATH="/usr/lib64"
+-DQT_HOST_PATH="/usr"
+-DQt6HostInfo_DIR="/usr/lib64/cmake/Qt6HostInfo"
 -DQT_BUILD_TOOLS_BY_DEFAULT:BOOL=OFF
 -DINSTALL_ARCHDATADIR:STRING=/usr/lib64/qt6
 -DINSTALL_BINDIR:STRING=/usr/lib64/bin

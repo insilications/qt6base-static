@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : qt6base-static
 Version  : 6.3
-Release  : 313
+Release  : 314
 URL      : file:///insilications/apps/qt6base-6.3.tar.gz
 Source0  : file:///insilications/apps/qt6base-6.3.tar.gz
 Summary  : No detailed summary available
@@ -13,7 +13,6 @@ Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 MIT
 Requires: shared-mime-info
 BuildRequires : Vulkan-Headers-dev
-BuildRequires : Vulkan-Headers-dev Vulkan-Loader-dev Vulkan-Tools
 BuildRequires : Vulkan-Loader-dev
 BuildRequires : Vulkan-Tools
 BuildRequires : alsa-lib
@@ -45,7 +44,6 @@ BuildRequires : buildreq-cmake
 BuildRequires : buildreq-configure
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-gnome
-BuildRequires : buildreq-qmake
 BuildRequires : bzip2-dev
 BuildRequires : bzip2-staticdev
 BuildRequires : cairo
@@ -79,11 +77,6 @@ BuildRequires : expat-dev
 BuildRequires : expat-staticdev
 BuildRequires : expect
 BuildRequires : extra-cmake-modules
-BuildRequires : extra-cmake-modules pkgconfig(egl)
-BuildRequires : extra-cmake-modules pkgconfig(glib-2.0)
-BuildRequires : extra-cmake-modules pkgconfig(wayland-client)
-BuildRequires : extra-cmake-modules pkgconfig(x11-xcb)
-BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
 BuildRequires : extra-cmake-modules-data
 BuildRequires : fftw-dev
 BuildRequires : fftw-staticdev
@@ -129,7 +122,6 @@ BuildRequires : libICE-dev
 BuildRequires : libSM-dev
 BuildRequires : libX11-data
 BuildRequires : libX11-dev
-BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86vm-dev
 BuildRequires : libX11-lib
 BuildRequires : libXScrnSaver
 BuildRequires : libXScrnSaver-dev
@@ -297,7 +289,6 @@ BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : pkgconfig(libxslt)
 BuildRequires : pkgconfig(libzstd)
 BuildRequires : pkgconfig(md4c)
-BuildRequires : pkgconfig(mit-krb5-gssapi)
 BuildRequires : pkgconfig(mtdev)
 BuildRequires : pkgconfig(nettle)
 BuildRequires : pkgconfig(nss)
@@ -334,7 +325,6 @@ BuildRequires : pkgconfig(xscrnsaver)
 BuildRequires : pkgconfig(xshmfence)
 BuildRequires : pkgconfig(xtst)
 BuildRequires : pkgconfig(zlib)
-BuildRequires : postgresql-dev
 BuildRequires : protobuf-dev
 BuildRequires : pugixml-dev
 BuildRequires : pulseaudio
@@ -378,7 +368,6 @@ BuildRequires : qt6base-data
 BuildRequires : qt6base-dev
 BuildRequires : qt6base-libexec
 BuildRequires : qt6base-staticdev
-BuildRequires : qtbase-dev
 BuildRequires : sed
 BuildRequires : snappy-dev
 BuildRequires : snappy-staticdev
@@ -475,7 +464,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645575513
+export SOURCE_DATE_EPOCH=1645576999
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -570,7 +559,7 @@ export LIBS="${LIBS_GENERATE}"
 -DCMAKE_INSTALL_LIBDIR=/usr/lib64 \
 -DCMAKE_PREFIX_PATH="/usr;/usr/lib64;/usr/lib;/usr/local/cuda/lib64;/usr/share" \
 -DQT_FORCE_FIND_TOOLS:BOOL=ON \
--DQT_HOST_PATH="/usr/lib64" \
+-DQT_HOST_PATH="/usr/lib64/cmake" \
 -DQT_BUILD_TOOLS_BY_DEFAULT:BOOL=OFF \
 -DINSTALL_ARCHDATADIR:STRING=/usr/lib64/qt6 \
 -DINSTALL_BINDIR:STRING=/usr/lib64/bin \
@@ -695,13 +684,12 @@ sd '(FLAGS.+)(\s\-fno\-fat\-lto\-objects)' -- '$1 -ffat-lto-objects' $(fd -uu --
 sd '(LINK_LIBRARIES.+)(\s\-fno\-fat\-lto\-objects)' -- '$1 -ffat-lto-objects' $(fd -uu --glob *.ninja)
 ## make_prepend64 end
 ## make_macro content
-exit 1
 cmake --build .
 ## make_macro end
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1645575513
+export SOURCE_DATE_EPOCH=1645576999
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
